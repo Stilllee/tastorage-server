@@ -8,8 +8,8 @@ datasource db {
 }
 
 /// 이 모델에는 행 수준 보안이 포함되어 있으며 마이그레이션을 위한 추가 설정이 필요합니다. 자세한 내용은 https://pris.ly/d/row-level-security를 ​​방문하세요.
-model Recipes {
-  id         BigInt   @id @unique @default(autoincrement())
+model Recipe {
+  id         Int      @id(map: "Recipes_pkey") @unique(map: "Recipes_id_key") @default(autoincrement())
   title      String
   servings   Int
   ingredient String[]
