@@ -1,0 +1,24 @@
+// 이것은 Prisma 스키마 파일입니다.
+// 문서에서 이에 대해 자세히 알아보세요: https://pris.ly/d/prisma-schema
+
+// 쿼리 속도를 높이거나 서버리스 또는 에지 기능을 사용하여 쉽게 확장할 수 있는 방법을 찾고 계십니까?
+// Prisma Accelerate를 사용해 보세요: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Recipe {
+  id         Int      @id @default(autoincrement())
+  title      String
+  servings   Int
+  ingredient String[]
+  directions String
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+}
