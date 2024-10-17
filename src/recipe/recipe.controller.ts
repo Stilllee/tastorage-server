@@ -12,7 +12,7 @@ import { RecipeService } from './recipe.service';
 import { RecipeEntity } from './entity/recipe.entity';
 
 @ApiTags('레시피')
-@Controller('recipes')
+@Controller('recipe')
 export class RecipeController {
   constructor(private readonly recipeService: RecipeService) {}
 
