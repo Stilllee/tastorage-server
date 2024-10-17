@@ -1,10 +1,12 @@
 import {
+  ApiNotFoundResponse,
   ApiOkResponse,
   ApiOperation,
+  ApiParam,
   ApiQuery,
   ApiTags,
 } from '@nestjs/swagger';
-import { Controller, Get, Query } from '@nestjs/common';
+import { Controller, Get, Param, Query } from '@nestjs/common';
 
 import { RecipeService } from './recipe.service';
 import { RecipeEntity } from './entity/recipe.entity';
@@ -44,5 +46,25 @@ export class RecipeController {
   })
   findSearchResult(@Query('q') q?: string) {
     return this.recipeService.searchRecipes(q);
+  }
+
+  @Get(':recipeId')
+  @ApiOperation({
+    summary: '특정 레시피 불러오기',
+    description: 'id를 기준으로 특정 레시피의 정보를 불러옵니다.',
+  })
+  @ApiParam({
+    name: 'recipeId',
+    description: '정보를 불러오려는 레시피의 아이디',
+    type: Number,
+  })
+  @ApiOkResponse({
+    type: RecipeEntity,
+  })
+  @ApiNotFoundResponse({
+    description: '{id}번 레시피는 존재하지 않습니다.',
+  })
+  findOne(@Param('recipeId') recipeId: number) {
+    return this.recipeService.findOneRecipe(recipeId);
   }
 }

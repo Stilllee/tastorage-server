@@ -1,4 +1,5 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
+
 import { PrismaService } from 'src/prisma/prisma.service';
 
 @Injectable()
@@ -23,5 +24,17 @@ export class RecipeService {
         ],
       },
     });
+  }
+
+  async findOneRecipe(id: number) {
+    const recipe = await this.prisma.recipe.findUnique({
+      where: {
+        id,
+      },
+    });
+    if (!recipe) {
+      throw new NotFoundException(`${id}번 레시피는 존재하지 않습니다.`);
+    }
+    return recipe;
   }
 }
