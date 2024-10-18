@@ -2,6 +2,7 @@ import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { HttpAdapterHost, NestFactory } from '@nestjs/core';
 
 import { AppModule } from './app.module';
+import { ClassValidatorException } from './util/class-validator-exception';
 import { PrismaClientExceptionFilter } from './util/prisma-client-exception.filter';
 import { ValidationPipe } from '@nestjs/common';
 
@@ -23,6 +24,7 @@ async function bootstrap() {
       whitelist: true,
       forbidNonWhitelisted: true,
       transform: true,
+      exceptionFactory: (errors) => new ClassValidatorException(errors),
     }),
   );
 
