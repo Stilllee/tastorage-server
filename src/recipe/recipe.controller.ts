@@ -16,6 +16,7 @@ import {
   Post,
   Query,
   Body,
+  Delete,
 } from '@nestjs/common';
 
 import { RecipeService } from './recipe.service';
@@ -109,5 +110,20 @@ export class RecipeController {
     @Body() updateRecipeDto: UpdateRecipeDto,
   ) {
     return this.recipeService.updateRecipe(recipeId, updateRecipeDto);
+  }
+
+  @Delete(':recipeId')
+  @ApiOperation({
+    summary: '특정 레시피 삭제하기',
+    description: 'id를 기준으로 특정 레시피를 삭제합니다.',
+  })
+  @ApiParam({
+    name: 'recipeId',
+    description: '삭제하려는 레시피의 아이디',
+    type: Number,
+  })
+  @ApiNotFoundResponse({ description: '레시피를 찾을 수 없습니다.' })
+  remove(@Param('recipeId') recipeId: number) {
+    return this.recipeService.removeRecipe(recipeId);
   }
 }

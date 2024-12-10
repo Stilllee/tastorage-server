@@ -58,4 +58,16 @@ export class RecipeService {
       data: updateRecipeDto,
     });
   }
+
+  async removeRecipe(id: number) {
+    const recipe = await this.prisma.recipe.findUnique({
+      where: { id },
+    });
+    if (!recipe) {
+      throw new NotFoundException(`${id}번 레시피는 존재하지 않습니다.`);
+    }
+    return await this.prisma.recipe.delete({
+      where: { id },
+    });
+  }
 }
