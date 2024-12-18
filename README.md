@@ -53,9 +53,11 @@ npm rnu start:prod
 
 ### API 문서
 
-로컬 환경에서 Swagger UI를 통해 API 문서를 확인할 수 있습니다.
 
+로컬 환경에서 Swagger UI를 통해 API 문서를 확인할 수 있습니다.
 - 접속 URL: http://localhost:12345/api
+
+![스크린샷 2024-12-18 오전 11 52 57](https://github.com/user-attachments/assets/a5e27cf4-4771-430d-95d6-57dea07c0a24)
 
 <br />
 
